@@ -153,6 +153,18 @@ def stat_menu(stats):
 
 
 def plotter(df,vms,stats):
+    """Function that plots the selected Stat for the selected VMs.
+
+    Parameters
+    ----------
+    df : dataframe
+        List of Stats found out in esxtop
+    vms : list
+        list of selected VMs to plot
+    stats : list
+        list of selected Stats to plot
+    """
+    
     avg_count = 0
     plot_type = 1
     s = ""
@@ -217,7 +229,6 @@ def plotter(df,vms,stats):
             elif "helper" in t:
                 pattern = re.compile(r'(helper).*(etherswitchHelper).*\\'+s)
                 
-
             for col in df.columns:
                 m = pattern.search(col)
                 if m:
@@ -226,8 +237,7 @@ def plotter(df,vms,stats):
                         label = v + ' ' + m.group(1) + ' ' + s
                         if 'Physical Cpu' in s:
                             line_style = 'o'
-                            #np.arange will return an evenly spaced values within the given interval
-                            plt.yticks(np.arange(0,56,1))
+                            plt.yticks(np.arange(0,56,1))   #np.arange will return an evenly spaced values within the given interval
                     elif 'Network Port' in t:
                         if m.group(1):
                             label = m.group(1) + v + m.group(2) + ' ' + s
@@ -266,8 +276,6 @@ def plotter(df,vms,stats):
         df['extra_col'] = df['extra_col'] / avg_count
         plt.plot(df['extra_col'], label=label, marker=line_style)
         del df['extra_col']
-
-
 
     #The following 2 lines provide meaningful information only when plotting %Run time of several VMs
     #Comment when the plot does not require them
