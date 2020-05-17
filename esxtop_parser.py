@@ -8,7 +8,7 @@
 #
 # Tested in vSphere 6.5
 #
-# v0.2 by Cesar Ortega (Telefonica InfraV) cesar.ortegaroman@telefonica.com
+# v1.1 by Cesar Ortega
 
 from pathlib import Path
 import numpy as np
